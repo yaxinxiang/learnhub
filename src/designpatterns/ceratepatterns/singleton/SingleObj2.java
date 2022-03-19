@@ -1,7 +1,8 @@
-package designmod.single;
+package designpatterns.ceratepatterns.singleton;
 
 /**
- * 单例模式饿汉式写法
+ * 单例模式
+ * 饿汉式写法：在类加载时完成实例化
  */
 public class SingleObj2 {
     private static SingleObj2 singleObj2 = new SingleObj2();
