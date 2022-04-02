@@ -1,0 +1,3 @@
+this is a bufferedStream file
+there is no Chinese word for reading!
+中文中文
