@@ -6,8 +6,8 @@ package hcmexp.exp1;
  */
 public class Node {
     public int[][] a;
-    int x, y;
-    public Node[] nodes;
+    int x, y; //存储
+    public Node[] nodes; // 0 存储父节点 1-4存储子节点
 
     public Node(int[][] s0) {
         a = s0;
@@ -15,6 +15,9 @@ public class Node {
         nodes = new Node[5];
     }
 
+    /**
+     * 根据目前八数码数组节点的状态推出之后可能的几种状态
+     */
     public void setUDLR() {
         if (a == null) {
             return;
@@ -32,7 +35,11 @@ public class Node {
         }
     }
 
-    public void find0(int[][] a) {
+    /**
+     * 寻找并记录空位
+     * @param a 八数码数组
+     */
+    private void find0(int[][] a) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (a[i][j] == 0) {
@@ -43,6 +50,16 @@ public class Node {
         }
     }
 
+    /**
+     * 复制数组并交换空位置与某个相邻数，
+     * 生成一个子节点的八数码状态数组
+     * @param x1 x1
+     * @param y1 y1
+     * @param x x
+     * @param y y
+     * @param s0 原数组
+     * @return 新数组
+     */
     private static int[][] getCopyAndChanged(int x1, int y1, int x, int y, int[][] s0) {
         int[][] res = new int[3][3];
         for (int i = 0; i < 3; i++) {
@@ -56,6 +73,12 @@ public class Node {
         return res;
     }
 
+    /**
+     * 判断两数组内容是否相等
+     * @param a 原数组
+     * @param target 目标数组
+     * @return
+     */
     public static boolean isEqual(int[][] a, int[][] target) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -67,6 +90,10 @@ public class Node {
         return true;
     }
 
+    /**
+     * 打印 本次node状态
+     * @param node 存储八数码状态的节点
+     */
     public static void printA(Node node) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -77,11 +104,22 @@ public class Node {
         System.out.println();
     }
 
+    /**
+     * 判断两个状态是否可达
+     * @param s0 初始状态
+     * @param target 目标状态
+     * @return true or false
+     */
     public static boolean canFigure(int[][] s0, int[][] target) {
-        return getInversionNumber(s0) % 2 == getInversionNumber(target) % 2;
+        return getPermutation(s0) % 2 == getPermutation(target) % 2;
     }
 
-    public static int getInversionNumber(int[][] a) {
+    /**
+     * 获取排列数
+     * @param a 原排列
+     * @return 排列数
+     */
+    public static int getPermutation(int[][] a) {
         int res = 0;
         for (int i = 0; i < 9; i++) {
             int tmp = a[i / 3][i % 3];
@@ -89,7 +127,7 @@ public class Node {
                 continue;
             }
             for (int j = 0; j < i; j++) {
-                if (tmp < a[j / 3][j % 3]) {
+                if (a[j / 3][j % 3] < tmp) {
                     res++;
                 }
             }

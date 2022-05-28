@@ -17,6 +17,11 @@ public class EightFigure {
         new EightFigure().search(s0, target);
     }
 
+    /**
+     * 搜索入口
+     * @param s0 起始状态
+     * @param target 目标状态
+     */
     public void search(int[][] s0, int[][] target) {
         tar = target;
         if (s0 == null || target == null || !Node.canFigure(s0, target)) {
@@ -28,6 +33,9 @@ public class EightFigure {
         printPath(this.target);
     }
 
+    /**搜索算法
+     * @param list 待搜索节点集合
+     */
     public void doSearch(List<Node> list) {
         System.out.println("searching!");
         if (list.size() == 0) {
@@ -49,6 +57,10 @@ public class EightFigure {
         doSearch(newList);
     }
 
+    /**
+     * 打印求解路径
+     * @param target 目标节点
+     */
     public void printPath(Node target) {
         Deque<Node> queue = new LinkedList<>();
         while (target != null) {
@@ -60,6 +72,11 @@ public class EightFigure {
         }
     }
 
+    /**
+     * 将八数码排列转换成八数码数组
+     * @param s 源八数码排列
+     * @return arr
+     */
     public static int[][] input(String s) {
         int[][] arr = new int[3][3];
         for (int i = 0; i < s.length(); i++) {
