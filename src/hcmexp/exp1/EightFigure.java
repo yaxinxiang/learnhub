@@ -9,6 +9,7 @@ import java.util.*;
 public class EightFigure {
     Node target;
     int[][] tar;
+    Set<Integer> set = new HashSet<>();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -16,7 +17,6 @@ public class EightFigure {
         int[][] target = input(sc.next());
         new EightFigure().search(s0, target);
     }
-
     /**
      * 搜索入口
      * @param s0 起始状态
@@ -50,8 +50,10 @@ public class EightFigure {
             }
             node.setUDLR();
             for (int i = 1; i <= 4; i++) {
-                if (node.nodes[i] != null)
+                if (node.nodes[i] != null && !set.contains(node.nodes[i].sum)){
                     newList.add(node.nodes[i]);
+                    set.add(node.nodes[i].sum);
+                }
             }
         }
         doSearch(newList);

@@ -7,12 +7,14 @@ package hcmexp.exp1;
 public class Node {
     public int[][] a;
     int x, y; //存储
+    public int sum = 0;
     public Node[] nodes; // 0 存储父节点 1-4存储子节点
 
     public Node(int[][] s0) {
         a = s0;
         find0(s0);
         nodes = new Node[5];
+        sum = Node.getSum(this);
     }
 
     /**
@@ -130,6 +132,16 @@ public class Node {
                 if (tmp < a[j / 3][j % 3]) {
                     res++;
                 }
+            }
+        }
+        return res;
+    }
+
+    public static int getSum(Node node){
+        int res = 0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                res = res * 10 + node.a[i][j];
             }
         }
         return res;
