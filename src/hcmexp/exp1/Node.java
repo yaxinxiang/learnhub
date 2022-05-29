@@ -129,6 +129,9 @@ public class Node {
                 continue;
             }
             for (int j = 0; j < i; j++) {
+                if(a[j / 3][j % 3] == 0){
+                    continue;
+                }
                 if (tmp < a[j / 3][j % 3]) {
                     res++;
                 }
