@@ -133,26 +133,22 @@ public class FaceRecognition {
         for (int j = 0; j < L; j++) {
             for (int k = 1; k < M; k++) {
                 deltaW[j][k] = alpha * deltaK[k] * H[j];
-//				deltaW[j][k] = (arph/(1+L))*(deltaW[j][k]+1)*deltaK[k]*H[j];
                 W[j][k] += deltaW[j][k];
             }
         }
         for (int k = 1; k < M; k++) {
             deltaSita[k] = alpha * deltaK[k];
-//			deltaSita[k] = (arph/(1+L))*(detaSitla[k]+1)*deltaK[k];
             sita[k] += deltaSita[k];
         }
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < L; j++) {
                 deltaV[i][j] = alpha * deltaJ[j] * X[i];
-//				deltaV[i][j] = (arph/(1+N))*(deltaV[i][j]+1)*deltaJ[j]*X[i];
                 V[i][j] += deltaV[i][j];
             }
         }
         for (int j = 0; j < L; j++) {
             deltaFai[j] = alpha * deltaJ[j];
-//			deltaFai[j] = (arph/(1+N))*(deltaFai[j]+1)*deltaJ[j];
             fai[j] += deltaFai[j];
         }
 
@@ -177,9 +173,7 @@ public class FaceRecognition {
             }
             Y[k] = sigmoid(derta - sita[k]);
         }
-
         double min = Double.MAX_VALUE;
-
         for (int n = 1; n < M; n++) {
             double E = 0.0;
             int[] D = new int[M];
@@ -208,7 +202,7 @@ public class FaceRecognition {
                 while (j <= 5) {
                     String person = i < 10 ? "0" + i : "" + i;
                     String imagePath;
-                    imagePath = "C:\\JavaProjects\\learnhub\\src\\hcmexp\\exp4\\YALE\\" + "subject" + person + "_" + j + ".bmp";
+                    imagePath = System.getProperty("user.dir") + "\\src\\hcmexp\\exp4\\YALE\\" + "subject" + person + "_" + j + ".bmp";
                     double[] X = getImagePixel(imagePath);
                     int[] D = new int[M];
                     D[i] = 1;
@@ -229,7 +223,7 @@ public class FaceRecognition {
             for (int j = 6; j <= 11; j++) {
                 String imagePath;
                 String person = i < 10 ? "0" + i : "" + i;
-                imagePath = "C:\\JavaProjects\\learnhub\\src\\hcmexp\\exp4\\YALE\\" + "subject" + person + "_" + j + ".bmp";
+                imagePath = System.getProperty("user.dir") + "\\src\\hcmexp\\exp4\\YALE\\" + "subject" + person + "_" + j + ".bmp";
                 double[] X = getImagePixel(imagePath);
                 int ans = BP(X);
                 System.out.println("预测答案：" + ans + " "+ "正确答案：" + i);
